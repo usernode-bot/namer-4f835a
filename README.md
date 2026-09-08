@@ -1,27 +1,27 @@
 # Namer
 
-> **Starter template** — this repo was scaffolded by Usernode Social
-> Vibecoding. Everything in it is placeholder example code until the
-> app's first real feature is built.
+A tiny name generator. Tap **Generate** to get a random two-word name
+(one adjective + one noun, e.g. "Silly Panda"), keep your own list of
+everything you've generated, and **Share** any of them to a public Home
+feed so everyone can see what names people are making.
 
-The scaffold is a small working demo that proves the plumbing works:
+## How it works
 
-- **Sign-in** — the server verifies the platform-issued user token
-  (an RS256 JWT) on every request, so the app already knows who is
-  using it. No accounts to build.
-- **Database** — the app has its own private Postgres database; the
-  demo stores button presses in a `presses` table.
-- **Live API** — two example routes (`/api/press`,
-  `/api/leaderboard`) read and write through a real Express server.
-- **Styling** — Tailwind CSS, precompiled by the Dockerfile on every
-  deploy, so there is nothing to rebuild by hand.
+- **Sign-in** — the server verifies the platform-issued user token (an
+  RS256 JWT) on every request, so the app already knows who's using it.
+- **Generate** — `POST /api/generate` picks one random adjective and one
+  random noun from a curated word list baked into `server.js` and saves
+  the combination to your personal list.
+- **My Names** — `GET /api/names` returns your own generated names,
+  newest first, each with a Share button.
+- **Share** — `POST /api/names/:id/share` marks one of your names as
+  shared; sharing is one-way (no unshare in v1).
+- **Home feed** — `GET /api/feed` returns every name any user has
+  shared, newest first, with the sharer's username.
 
-## Replacing the template
+## Development
 
-Open the app on Usernode, tap **Improve** in the header, and describe
-the app you want in plain English — the template will be replaced with
-your real app. You can also run Claude Code against this repo directly;
-start with `CLAUDE.md`, which carries the app-specific notes and
-points at the platform rules.
-
-Once the real app exists, rewrite this README to describe it.
+- `npm start` — run the server locally.
+- `npm run build:css` — recompile `public/tailwind.css` from
+  `styles/tailwind-input.css` (the Dockerfile does this automatically on
+  every deploy).

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <script>
   // usernode-dev-console@1
   (function () {
@@ -80,102 +80,182 @@
   <link rel="stylesheet" href="/tailwind.css">
 </head>
 <body class="bg-zinc-950 text-zinc-100 min-h-screen">
-  <main class="max-w-md mx-auto px-4 py-10 flex flex-col gap-6">
+  <main class="max-w-md mx-auto px-4 py-8 flex flex-col gap-5">
 
-    <!-- usernode-starter-notice@1 — starter-template messaging. When building
-         the user's real app, replace this whole screen and delete this block,
-         both sentinel comments included. -->
-    <section class="rounded-2xl border border-violet-500/30 bg-gradient-to-b from-violet-600/20 to-transparent p-6 text-center flex flex-col items-center gap-3">
-      <span class="inline-block rounded-full bg-violet-600/20 text-violet-300 text-xs font-semibold uppercase tracking-wide px-3 py-1">Starter template</span>
+    <header class="flex flex-col items-center gap-4">
       <h1 class="text-2xl font-bold">Namer</h1>
-      <p class="text-sm text-zinc-300 leading-relaxed">Welcome to your new app! Everything on this screen is placeholder content that came with it.</p>
-      <p class="text-sm text-zinc-300 leading-relaxed">Tap <strong class="text-violet-300 font-semibold">Improve</strong> in the header, describe what you'd like in plain English, and it will be turned into your real app.</p>
-    </section>
+      <nav class="w-full grid grid-cols-2 rounded-xl border border-zinc-800 bg-zinc-900/60 p-1">
+        <button id="tab-mine" class="tab-btn rounded-lg py-2 text-sm font-medium transition-colors" data-tab="mine">My Names</button>
+        <button id="tab-home" class="tab-btn rounded-lg py-2 text-sm font-medium transition-colors" data-tab="home">Home</button>
+      </nav>
+    </header>
 
-    <section>
-      <h2 class="text-sm font-medium text-zinc-500 mb-2 px-1">What's already working</h2>
-      <div class="rounded-xl border border-zinc-800 bg-zinc-900/60 divide-y divide-zinc-800">
-        <div class="flex items-start gap-3 p-4">
-          <svg class="w-5 h-5 text-violet-400 shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 1 1 1.4-1.4L9 11.6l6.3-6.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></svg>
-          <div>
-            <p class="text-sm font-semibold text-zinc-100">Sign-in</p>
-            <p class="text-sm text-zinc-400">You're signed in through Usernode automatically — no accounts to build.</p>
-          </div>
-        </div>
-        <div class="flex items-start gap-3 p-4">
-          <svg class="w-5 h-5 text-violet-400 shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 1 1 1.4-1.4L9 11.6l6.3-6.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></svg>
-          <div>
-            <p class="text-sm font-semibold text-zinc-100">Database</p>
-            <p class="text-sm text-zinc-400">Your app has its own private database, ready to store things.</p>
-          </div>
-        </div>
-        <div class="flex items-start gap-3 p-4">
-          <svg class="w-5 h-5 text-violet-400 shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 1 1 1.4-1.4L9 11.6l6.3-6.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></svg>
-          <div>
-            <p class="text-sm font-semibold text-zinc-100">Live API</p>
-            <p class="text-sm text-zinc-400">The example below talks to a real server — try it.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- /usernode-starter-notice@1 -->
-
-    <section class="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 flex flex-col items-center gap-5">
-      <div class="w-full flex items-baseline justify-between gap-2">
-        <h2 class="text-sm font-medium text-zinc-500">Try the example</h2>
-        <span class="text-xs text-zinc-600">This example will be replaced</span>
+    <section id="screen-mine" class="flex flex-col items-center gap-5">
+      <div class="rounded-xl border border-zinc-800 bg-zinc-900/60 p-6 w-full flex flex-col items-center gap-4">
+        <button id="generate-btn" class="px-8 py-4 rounded-full bg-violet-600 hover:bg-violet-500 active:scale-95 transition-all text-white text-lg font-bold shadow-lg shadow-violet-600/30">
+          Generate
+        </button>
+        <p class="text-xs text-zinc-500">Tap to create a random two-word name</p>
       </div>
 
-      <button id="press-btn" class="w-32 h-32 rounded-full bg-violet-600 hover:bg-violet-500 active:scale-95 transition-all text-white text-xl font-bold shadow-lg shadow-violet-600/30">
-        Press!
-      </button>
-
-      <div id="count" class="text-lg text-zinc-400">0 total presses</div>
-
-      <div class="w-full max-w-sm">
-        <h3 class="text-sm font-medium text-zinc-500 mb-2 text-center">Leaderboard</h3>
-        <div id="leaderboard" class="space-y-1"></div>
+      <div class="w-full flex flex-col gap-2">
+        <h2 class="text-sm font-medium text-zinc-500 px-1">My names</h2>
+        <div id="mine-list" class="flex flex-col gap-2"></div>
       </div>
     </section>
 
-    <p class="text-center text-xs text-zinc-600">Built on Usernode — this template screen disappears once you build your real app.</p>
+    <section id="screen-home" class="hidden flex-col gap-2">
+      <h2 class="text-sm font-medium text-zinc-500 px-1">Shared by everyone</h2>
+      <div id="feed-list" class="flex flex-col gap-2"></div>
+    </section>
+
   </main>
 
   <script>
     const params = new URLSearchParams(window.location.search);
     const token = params.get('token') || '';
     const headers = token ? { 'x-usernode-token': token } : {};
+    const jsonHeaders = { 'Content-Type': 'application/json', ...headers };
 
-    async function loadLeaderboard() {
-      const res = await fetch('/api/leaderboard', { headers });
-      if (!res.ok) return;
-      const { leaderboard } = await res.json();
-      const el = document.getElementById('leaderboard');
-      if (!leaderboard.length) {
-        el.innerHTML = '<p class="text-center text-zinc-600 text-sm">No presses yet</p>';
-        return;
-      }
-      el.innerHTML = leaderboard.map((r, i) =>
-        '<div class="flex justify-between px-3 py-1 rounded ' + (i === 0 ? 'bg-violet-600/20 text-violet-300' : 'text-zinc-400') + '">' +
-        '<span>' + (i + 1) + '. ' + r.username + '</span>' +
-        '<span class="font-mono">' + r.presses + '</span></div>'
-      ).join('');
-      const total = leaderboard.reduce((s, r) => s + parseInt(r.presses), 0);
-      document.getElementById('count').textContent = total + ' total presses';
+    const tabs = {
+      mine: { btn: document.getElementById('tab-mine'), screen: document.getElementById('screen-mine') },
+      home: { btn: document.getElementById('tab-home'), screen: document.getElementById('screen-home') },
+    };
+
+    function activeTabClasses(isActive) {
+      return isActive
+        ? ['bg-violet-600', 'text-white']
+        : ['text-zinc-400', 'hover:text-zinc-200'];
     }
 
-    document.getElementById('press-btn').addEventListener('click', async () => {
-      try {
-        const res = await fetch('/api/press', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', ...headers },
+    function showTab(name) {
+      if (!tabs[name]) name = 'mine';
+      for (const key of Object.keys(tabs)) {
+        const { btn, screen } = tabs[key];
+        const isActive = key === name;
+        screen.classList.toggle('hidden', !isActive);
+        screen.classList.toggle('flex', isActive);
+        btn.classList.remove('bg-violet-600', 'text-white', 'text-zinc-400', 'hover:text-zinc-200');
+        btn.classList.add(...activeTabClasses(isActive));
+      }
+      if (name === 'home') loadFeed();
+      if (name === 'mine') loadMine();
+    }
+
+    function tabFromHash() {
+      const hash = window.location.hash.replace(/^#\/?/, '');
+      return hash === 'home' ? 'home' : 'mine';
+    }
+
+    tabs.mine.btn.addEventListener('click', () => { window.location.hash = '#/mine'; });
+    tabs.home.btn.addEventListener('click', () => { window.location.hash = '#/home'; });
+    window.addEventListener('hashchange', () => showTab(tabFromHash()));
+
+    function timeAgo(iso) {
+      const seconds = Math.max(0, Math.floor((Date.now() - new Date(iso).getTime()) / 1000));
+      if (seconds < 60) return 'just now';
+      const minutes = Math.floor(seconds / 60);
+      if (minutes < 60) return minutes + 'm ago';
+      const hours = Math.floor(minutes / 60);
+      if (hours < 24) return hours + 'h ago';
+      const days = Math.floor(hours / 24);
+      return days + 'd ago';
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, (c) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+      }[c]));
+    }
+
+    function renderMine(names) {
+      const el = document.getElementById('mine-list');
+      if (!names.length) {
+        el.innerHTML = '<p class="text-center text-zinc-600 text-sm py-6">No names yet. Tap Generate to make your first one!</p>';
+        return;
+      }
+      el.innerHTML = names.map((n) => `
+        <div class="flex items-center justify-between gap-3 rounded-lg border border-zinc-800 bg-zinc-900/60 px-4 py-3">
+          <span class="font-semibold">${escapeHtml(n.name)}</span>
+          <button data-id="${n.id}" class="share-btn shrink-0 text-xs font-semibold px-3 py-1.5 rounded-full transition-colors ${n.shared ? 'bg-zinc-800 text-zinc-500 cursor-default' : 'bg-violet-600 hover:bg-violet-500 text-white'}" ${n.shared ? 'disabled' : ''}>
+            ${n.shared ? 'Shared' : 'Share'}
+          </button>
+        </div>
+      `).join('');
+
+      el.querySelectorAll('.share-btn:not([disabled])').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const id = btn.getAttribute('data-id');
+          btn.disabled = true;
+          try {
+            const res = await fetch(`/api/names/${id}/share`, { method: 'POST', headers: jsonHeaders });
+            if (res.ok) {
+              loadMine();
+            } else {
+              btn.disabled = false;
+            }
+          } catch {
+            btn.disabled = false;
+          }
         });
-        if (res.ok) loadLeaderboard();
-        else if (res.status === 401) document.getElementById('count').textContent = 'Sign in to press!';
+      });
+    }
+
+    function renderFeed(feed) {
+      const el = document.getElementById('feed-list');
+      if (!feed.length) {
+        el.innerHTML = '<p class="text-center text-zinc-600 text-sm py-6">No names shared yet</p>';
+        return;
+      }
+      el.innerHTML = feed.map((f) => `
+        <div class="flex items-center justify-between gap-3 rounded-lg border border-zinc-800 bg-zinc-900/60 px-4 py-3">
+          <div class="flex flex-col">
+            <span class="font-semibold">${escapeHtml(f.name)}</span>
+            <span class="text-xs text-zinc-500">@${escapeHtml(f.username)}</span>
+          </div>
+          <span class="text-xs text-zinc-600 shrink-0">${timeAgo(f.shared_at)}</span>
+        </div>
+      `).join('');
+    }
+
+    function renderSignedOut(elId, message) {
+      document.getElementById(elId).innerHTML =
+        `<p class="text-center text-zinc-600 text-sm py-6">${escapeHtml(message)}</p>`;
+    }
+
+    async function loadMine() {
+      if (!token) return renderSignedOut('mine-list', 'Open this app in Usernode to see your names.');
+      try {
+        const res = await fetch('/api/names', { headers });
+        if (!res.ok) return;
+        const { names } = await res.json();
+        renderMine(names);
       } catch {}
+    }
+
+    async function loadFeed() {
+      if (!token) return renderSignedOut('feed-list', 'Open this app in Usernode to see the feed.');
+      try {
+        const res = await fetch('/api/feed', { headers });
+        if (!res.ok) return;
+        const { feed } = await res.json();
+        renderFeed(feed);
+      } catch {}
+    }
+
+    document.getElementById('generate-btn').addEventListener('click', async () => {
+      if (!token) return;
+      const btn = document.getElementById('generate-btn');
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/generate', { method: 'POST', headers: jsonHeaders });
+        if (res.ok) loadMine();
+      } finally {
+        btn.disabled = false;
+      }
     });
 
-    loadLeaderboard();
+    showTab(tabFromHash());
   </script>
 </body>
 </html>

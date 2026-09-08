@@ -1,3 +1,7 @@
 {
-  "secrets": []
+  "secrets": [],
+  "tests": [
+    { "name": "My Names screen renders", "path": "/#/mine", "expectSelector": "#generate-btn" },
+    { "name": "Home feed renders", "path": "/#/home", "expectSelector": "#feed-list" }
+  ]
 }
